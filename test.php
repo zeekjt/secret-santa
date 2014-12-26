@@ -3,7 +3,7 @@
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 
-$start = microtime(true);
+$time = microtime(TRUE);
 
 $participants = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
 shuffle($participants);
@@ -16,9 +16,16 @@ for ($i = 0; $i < count($participants) - 1; $i++) {
 
 $result[$participants[count($participants) - 1]] = $participants[0];
 
-$end = number_format((microtime(true) - $start), 3);
+$time = number_format((microtime(TRUE) - $time), 10);
 
 echo '<pre>';
 print_r($result);
 echo '</pre>';
-echo '<br />' . 'Pairing took ' . $end . ' seconds';
+echo '<br />' . 'Pairing took ' . $time . ' seconds';
+echo '<br />' . 'Memory usage: ' . convert(memory_get_usage(TRUE));
+
+function convert($size)
+{
+	$unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+	return @round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . $unit[$i];
+}
