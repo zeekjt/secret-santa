@@ -9,7 +9,6 @@ class DB
 	{
 		try {
 			$this->_pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-			echo 'great success';
 		} catch (PDOException $e) {
 			throw new PDOException('Error connecting to database ' . $e->getMessage());
 		}
